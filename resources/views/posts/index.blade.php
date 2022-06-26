@@ -16,8 +16,8 @@
 <div class="card mb-5 mt-5"> 
     <div class="card-header"> 
 <a href="posts/{{$post->id}}"><h3 class=" text-center">{{$post -> title}} </h3></a>
-Created at {{$post -> created_at->diffforHumans()}}
-|
+Created at {{$post -> created_at->diffforHumans()}} by {{$post->user_id}}
+{{$post->user_id}}
 Updated at {{$post -> updated_at->diffforHumans()}}
 </div>
 <p class="ms-5"> {{$post-> body}}</p>

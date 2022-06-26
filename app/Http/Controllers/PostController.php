@@ -10,6 +10,10 @@ class PostController extends Controller
     public function index() {
 
         $posts = Post::paginate(3);
+        
+        $posts = Post::join('users', 'posts.user_id', '=', 'users.id')
+                ->select('posts.*', 'users.name as name')
+                ->paginate(3);
 
         return view('posts.index', compact('posts'));
     }
