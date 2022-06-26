@@ -22,7 +22,7 @@
                 @error('password')
                 <div class="text-danger"> {{$message}} </div>
                 @enderror
-                <div class="d-flex justify-content-between"> 
+                <div class="d-flex justify-content-between card-footer"> 
                 <button type="submit" class="btn btn-primary"> Login  </button>
                 <a href="posts" class="btn btn-success"> Back </a>
             </div>

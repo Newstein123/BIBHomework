@@ -28,7 +28,7 @@
              <div class="text-danger"> {{$message}}</div>
           @enderror
           <br>
-             <div class="d-flex justify-content-between"> 
+             <div class="d-flex justify-content-between card-footer"> 
                 <button type="submit" class="btn btn-primary"> Register </button>
                 <a href="posts" class="btn btn-success"> Back </a>
             </div>

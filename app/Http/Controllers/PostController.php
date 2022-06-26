@@ -9,7 +9,7 @@ class PostController extends Controller
 {
     public function index() {
 
-        $posts = Post::all();
+        $posts = Post::paginate(3);
 
         return view('posts.index', compact('posts'));
     }
@@ -30,13 +30,21 @@ class PostController extends Controller
 //     'body.required' => "ကိုထည်လိုသည်",
 //     'body.min' => "အနည်းဆုံးစာလုံးရေငါးလုံးရှိရမည်"
 // ]);
-        $post = new Post();
-        $post -> title = $request-> title;
-        $post -> body = $request->body;
-        $post -> created_at = now();
-        $post -> updated_at = now();
+        // $post = new Post();
+        // $post -> title = $request-> title;
+        // $post -> body = $request->body;
+        // $post -> created_at = now();
+        // $post -> updated_at = now();
     
-        $post -> save();
+        // $post -> save();
+
+        // session()->flash('success', 'A post was created successfully');
+    
+        // return redirect('/posts');
+
+        post::create($request->only(['title', 'body']));
+
+        session()->flash('success', 'A post was created successfully');
     
         return redirect('/posts');
     }
@@ -62,18 +70,21 @@ class PostController extends Controller
         // ]);
        $post = Post::find($id);
 
-        $post -> title = $request->title;
-        $post -> title = $request-> body;
-        $post -> updated_at = now();
-        $post -> save();
+        // $post -> title = $request->title;
+        // $post -> title = $request-> body;
+        // $post -> updated_at = now();
+        // $post -> save();
+        
 
-        return redirect('/posts');
+        $post->update($request->only(['title', 'body']));
+
+        return redirect('/posts')->with('success', 'A post was edited successfully');
     }
 
     public function destroy($id) {
         Post::destroy($id);  
           
-        return redirect('/posts');   
+        return redirect('/posts')->with('success', 'A post was deleted successfully');   
     }
 }
 

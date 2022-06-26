@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\User;
 use App\Http\Requests\RegisterRequest;
 
@@ -19,6 +20,7 @@ class RegisterController extends Controller
         $user->password = bcrypt($request->password);
 
         $user->save();
+        
         return redirect('login');
     }
 }

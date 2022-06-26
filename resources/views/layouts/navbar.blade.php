@@ -6,7 +6,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
+          @auth
           <a class="nav-link " aria-current="page" href="/posts/create"> Create a post </a>
+          @endauth
 
           @if(Auth::user()) 
        
