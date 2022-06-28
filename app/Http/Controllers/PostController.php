@@ -1,20 +1,26 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Post;
+use App\Models\User;
+use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Auth;
 
+
 class PostController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
 
-        $posts = Post::paginate(3);
+    
+   
+        // $posts = Post::join('users', 'posts.user_id', '=', 'users.id')
+        //         ->select('posts.*', 'users.name as author')
+        //         ->orderBy('id', 'desc')
+        //         ->paginate(5);
+        $posts =Post::where('title', 'like', '%'. $request->search. '%')->Paginate(5);
         
-        $posts = Post::join('users', 'posts.user_id', '=', 'users.id')
-                ->select('posts.*', 'users.name as name')
-                ->paginate(3);
-
         return view('posts.index', compact('posts'));
     }
 
@@ -46,7 +52,11 @@ class PostController extends Controller
     
         // return redirect('/posts');
 
-        post::create($request->only(['title', 'body']));
+        post::create([
+            'title' => $request->title,
+                'body' => $request->body,
+                'user_id'=> auth()->id()
+        ]);
 
         session()->flash('success', 'A post was created successfully');
     
@@ -54,7 +64,12 @@ class PostController extends Controller
     }
 
     public function show($id) {
-        $post = Post::find($id);
+        // $post = Post::find($id);
+
+        $post = Post::join('users', 'posts.user_id', '=', 'users.id')
+        ->select('posts.*', 'users.name as author')
+        ->where('posts.id', $id)
+        ->first();
 
         return view('posts.show', compact('post'));
     }

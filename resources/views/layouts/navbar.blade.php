@@ -8,6 +8,8 @@
         <div class="navbar-nav">
           @auth
           <a class="nav-link " aria-current="page" href="/posts/create"> Create a post </a>
+
+          <a class="nav-link " aria-current="page" href="/my-posts"> My Posts  </a>
           @endauth
 
           @if(Auth::user()) 
