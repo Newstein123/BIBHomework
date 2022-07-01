@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Auth;
@@ -13,20 +14,32 @@ class PostController extends Controller
 {
     public function index(Request $request) {
 
+        
+        // Post_Category Join 
+
+        $posts = Post::join('category_post', 'posts.id', '=', 'category_post.post_id')
+            ->join('categories', 'category_post.category_id', '=', 'categories.id')
+            ->select('posts.*', 'categories.name as category',)
+            ->orderBy('id', 'desc')
+            ->get();
     
-   
+
         // $posts = Post::join('users', 'posts.user_id', '=', 'users.id')
         //         ->select('posts.*', 'users.name as author')
         //         ->orderBy('id', 'desc')
         //         ->paginate(5);
-        $posts =Post::where('title', 'like', '%'. $request->search. '%')->Paginate(5);
+
+        $posts =Post::where('title', 'like', '%'. $request->search. '%')->orderBy('id', 'desc')->Paginate(5);
         
         return view('posts.index', compact('posts'));
     }
 
     public function create() 
-    {
-        return view('posts.create');
+    {   
+        $posts = Post::all();
+        return view('posts.create', compact('posts'));
+        $categories = Category::all();
+        return redirect('post.create', compact('categories'));
     }
 
     public function store(PostRequest $request) {

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UserSeeder::class);
         $this->call(PostSeeder::class);
+        $this->call(CategorySeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

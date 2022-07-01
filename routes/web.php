@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
@@ -28,6 +29,19 @@ Route::delete('/posts/{id}', [PostController::class, 'destroy']);
 
 // Route::resource('posts', PostController::class);
 
+// Category 
+
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/categories/create', [CategoryController::class, 'create']);
+Route::post('/categories', [CategoryController::class, 'store']);
+Route::get('/categories/{id}', [CategoryController::class, 'show']);
+Route::get('/categories/{id}/edit', [CategoryController::class, 'edit']);
+Route::put('/categories/{id}', [CategoryController::class, 'update']);
+Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
+
+
+// Login 
+
 Route::get('register', [RegisterController::class, 'create']);
 Route::post('register', [RegisterController::class, 'store']);
 
@@ -36,3 +50,5 @@ Route::post('login', [LoginController::class, 'store']);
 Route::get ('logout', [LoginController::class, 'destroy']);
 
 Route::get('my-posts', [MyPostController::class, 'index']);
+
+

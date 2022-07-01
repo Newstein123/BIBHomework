@@ -20,6 +20,18 @@
     <label for="" class="text-dark"> Post Body </label>
     <textarea name="body" id="" cols="10" rows="10" class="form-control text-primary"></textarea>
     <br>
+    <div class="container">
+        <select class="form-select" aria-label="Default select example">
+            <option selected> Select Category </option>
+            {{-- @foreach ($categories as $category)
+            <option value="{{$category->id}}"> {{$category->category}}</option>   
+            @endforeach --}}
+
+            @foreach($posts as $post)
+            <option value="{{$post->id}}"> {{$post->title}}</option>   
+            @endforeach
+          </select>
+    </div>
     @error('body')
     <div style="color: red"> {{$message }}</div>
     @enderror

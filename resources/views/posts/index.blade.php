@@ -32,7 +32,7 @@
         <div class="card-header"> 
     <a href="posts/{{$post->id}}"><h3 class=" text-center">{{$post -> title}} </h3></a>
     Created at {{$post -> created_at->diffforHumans()}} by <b>{{$post->user->name}}</b> 
-    Updated at {{$post -> updated_at->diffforHumans()}}
+         {{-- {{$categories->category}} --}}
     </div>
     <p class="ms-5"> {{$post-> body}}</p>
     @if($post->isOwn())

@@ -8,8 +8,20 @@
         <div class="navbar-nav">
           @auth
           <a class="nav-link " aria-current="page" href="/posts/create"> Create a post </a>
-
           <a class="nav-link " aria-current="page" href="/my-posts"> My Posts  </a>
+          <a class="nav-link " aria-current="page" href="/categories/create"> Create a category </a>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle me-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Categories
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="/categories"> All Ctg </a></li>
+              <li><a class="dropdown-item" href="logout"> Ctg1  </a></li>
+              <li><a class="dropdown-item" href="logout"> Ctg2 </a></li>
+            
+            </ul>
+          </div>
+        
           @endauth
 
           @if(Auth::user()) 
