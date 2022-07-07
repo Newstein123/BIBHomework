@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -16,9 +17,19 @@ class CategoryController extends Controller
      */
     public function index()
     {   
-
-        $categories = Category::all();
-
+        
+        // if($search = request('search')) {
+        //     $categories =Category::where('name', 'like', "%$search%")->orderBy('id', 'desc')->paginate(5)->withQueryString();
+        // } else {
+        //     $categories = Category::orderBy('id', 'desc')->paginate(5);
+        // }
+       $categories =  Category::when('bool', function($query) { $query->
+            where('name', 'like', '%'.request('search'). '%');
+        })
+        ->orderBy('id', 'desc')
+        ->paginate(5)
+        ->withQueryString();
+      
         // $categories = Category::join('category_post', 'category_post.category_id', '=', 'categories.id')
         //         ->select('categories.*', 'categories.name as category')
         //         ->paginate(5);
@@ -47,14 +58,14 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         category::create([
             'name' => $request->name
         ]);
 
         // return "save";
-        return redirect('categories');
+        return redirect('categories')->with('success', 'A category is created successfully');
     }
 
     /**
@@ -87,11 +98,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {   
         $category = Category::find($id);
         $category->update($request->only(['name']));
-        return redirect('categories');
+        return redirect('categories')->with('success', 'A category is deleted successfully');
     }
 
     /**
@@ -103,6 +114,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::destroy($id);
-       return redirect('categories');
+       return redirect('categories')->with('success', 'A category is updated successfully');
     }
 }

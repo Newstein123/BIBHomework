@@ -8,9 +8,14 @@
 @section('content')
 <h1 class="text-white text-center mb-3"> Create A Category </h1>
 
-<form action="/categories" method="POST">
+<form action="{{route('categories.store')}}" method="POST">
 @csrf
     <label for="" class="text-dark"> Category Title </label>
+    @error('name')
+    <div class="text-danger"> 
+        {{$message}}
+    </div>
+    @enderror
     <input type="text" name="name" id="" class="form-control text-primary">
     <br>
     <br> <br>

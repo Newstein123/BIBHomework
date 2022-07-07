@@ -5,11 +5,16 @@
 @section('content')
 <h1 class="text-white text-center mb-3"> Create A Category </h1>
 
-<form action="/categories/{{$category->id}}" method="POST">
+<form action="{{route('categories.update', ['id' => $category->id]);}}" method="POST">
 @csrf
 @method('PUT')
+
+
     <label for="" class="text-dark"> Category Title </label>
-    <input type="text" name="name" id="" class="form-control text-primary" value="{{$category->name}}">
+    <input type="text" name="name" id="" class="form-control text-primary @error('name') is-invalid @enderror" value="{{$category->name}}">
+    @error('name')
+<div class="text-danger"> {{$message}}</div>
+@enderror
     <br>
     <br> <br>
     <label for="" class="text-dark"> Description </label>

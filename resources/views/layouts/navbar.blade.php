@@ -1,15 +1,15 @@
 <nav class="navbar navbar-expand-lg bg-light text-center">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/posts"> Home Page  </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           @auth
-          <a class="nav-link " aria-current="page" href="/posts/create"> Create a post </a>
-          <a class="nav-link " aria-current="page" href="/my-posts"> My Posts  </a>
-          <a class="nav-link " aria-current="page" href="/categories/create"> Create a category </a>
+          <a class="nav-link @if(request()->path()== 'posts') active @endif" href="/posts"> Home Page  </a>
+          <a class="nav-link @if(request()->path()== 'posts/create') active @endif " aria-current="page" href="/posts/create"> Create a post </a>
+          <a class="nav-link @if(request()->path()== 'my-posts') active @endif " aria-current="page" href="/my-posts"> My Posts  </a>
+          <a class="nav-link @if(request()->path()== 'categories/create') active @endif " aria-current="page" href="{{route('categories.create')}}"> Create a category </a>
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle me-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               Categories
